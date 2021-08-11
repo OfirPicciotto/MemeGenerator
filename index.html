@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeMe Generator</title>
+    <script src="https://kit.fontawesome.com/1ed641f7ad.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="imgs/icongif.gif" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body onload="init()">
+    <div class="screen" onclick="toggleMenu()"></div>
+
+    <header class="header">
+        <div class="container flex space-between align-center">
+            <div class="logo">memgen</div>
+            <ul class="main-nav clean-list flex">
+                <li><button data-trans="gallery" class="btn-header" onclick="onBackToGallery()">Gallery</button></li>
+                <div class="seperator"></div>
+                <li><button data-trans="memes" class="btn-header" onclick="onOpenMememsGallery()">Memes</button></li>
+                <div class="seperator"></div>
+                <li><button data-trans="about" class="btn-header" onclick="toggleModal()">About</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="meme-editor bounce-in-top display container flex space-between">
+        <canvas id="canvas" width="450" height="450"></canvas>
+
+        <div class="actions grid">
+            <input type="text" onkeyup="onInputText(this)" onkeypress="onInputText(this)" class="input-text "
+                data-trans="text-placeholder" placeholder="Enter Text Here" />
+                <button onclick="onMoveUp()"><i class="fas fa-arrow-up"></i></button>
+                <button onclick="onMoveDown()"><i class="fas fa-arrow-down"></i></button>
+            <button onclick="onAddLine()"><i class="fas fa-plus"></i></button>
+            <button onclick="onRemoveLine()"><i class="fas fa-trash-alt"></i></button>
+            <button onclick="onSwitchLines()"><i class="fas fa-arrows-alt-v"></i></button>
+            <label class="btn-size"><input class="range" type="range" id="size" name="size" min="20" max="80" value="40"
+                    onchange="onChangeSize(this.value);" />
+            </label>
+            <button onclick="onLeft()"><i class="fas fa-align-left"></i></button>
+            <button onclick="onCenter()"><i class="fas fa-align-center"></i></button>
+            <button onclick="onRigth()"><i class="fas fa-align-right"></i></button>
+            <select class="font-select" onclick="onChangeFont(this.value)">
+                <option style="font-family: Impact" value="Impact-Regular">AbCdEF אבגדהו</option>
+                <option style="font-family: Eurofurenceregular" value="Euro-Regular">AbCdEF אבגדהו</option>
+                <option style="font-family: Assistant-VariableFont_wght" value="Assistant-VariableFont_wght">AbCdEF אבגדהו</option>
+                <option style="font-family: PaletteMosaic-Regular" value="PaletteMosaic-Regular">AbCdEF אבגדהו</option>
+                <option style="font-family: MonteCarlo-Regular" value="MonteCarlo-Regular">AbCdEF אבגדהו</option>
+            </select>
+            <button class="color-fill"> <input type="color" id="shape-color" name="contact"
+                    onchange="onChangeColor(this.value)" /></button>
+            <div class="stickers flex space-between">
+                <label onclick="onCreateSticker(this.innerText)" class="sticker">🥺</label>
+                <label onclick="onCreateSticker(this.innerText)" class="sticker">🔥</label>
+                <label onclick="onCreateSticker(this.innerText)" class="sticker">👍</label>
+                <label onclick="onCreateSticker(this.innerText)" class="sticker">💡</label>
+                <label onclick="onCreateSticker(this.innerText)" class="sticker">😡</label>
+                <label onclick="onCreateSticker(this.innerText)" class="sticker">🥰</label>
+                <label onclick="onCreateSticker(this.innerText)" class="sticker">🎯</label>
+            </div>
+            <button class="btn-save" onclick="onSave()"> <i class="far fa-save"></i></button>
+        </div>
+    </div>
+
+    <div class="gallery container">
+        <div class="search-section flex space-between">
+            <div>
+                <label data-trans="search" for="search">Search:</label>
+                <input type="search" placeholder="Enter Keyword To Search" onchange="onFilterKeyWord(this.value)"
+                    list="search" id="mysearch" autocomplete="off" name="search" />
+                <datalist id="search"></datalist>
+            </div>
+            <section class="key-words grid"></section>
+        </div>
+        <div class="image-gallery container grid"></div>
+    </div>
+
+    <section class="social-container">
+        <div class="container flex align-center">
+            <div class="personal-img"><img src="/imgs/ofir.jpg" alt="profile picture"></div>
+            <div class="personal-content flex">
+                <h2>Ofir Picciotto</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore repellendus sit quo eligendi
+                    consequuntur distinctio nemo quae, eos facilis corrupti! Suscipit nobis ex sapiente nesciunt
+                    repellat dicta et aspernatur consequatur. Dolor necessitatibus commodi aliquam
+                </p>
+                <div class="social-links flex">
+                    <a class="social-linkedin" href="https://www.linkedin.com/in/ofir-picciotto-3524a2184/"
+                        target="blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="social-facebook" href="https://www.facebook.com/ofir.picciotto" target="blank"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="social-github" href="https://github.com/OfirPicciotto" target="blank"><i
+                            class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer flex space-evenly align-center">
+        <div class="logo">memgen</div>
+        <div class="copyright">all rights reserved to Ofir Picciotto 2021</div>
+    </footer>
+
+</body>
+
+<script src="js/storage-service.js"></script>
+<script src="js/gallery-serevice.js"></script>
+<script src="js/gallery-controller.js"></script>
+<script src="js/canvas-controller.js"></script>
+<script src="js/meme-service.js"></script>
+
+</html>
