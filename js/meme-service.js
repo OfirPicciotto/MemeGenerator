@@ -66,6 +66,11 @@ function setNewType(newColor, type) {
     gMeme.lines[gMeme.selectedLineIdx][type] = newColor;
 }
 
+function setPosition(x, y) {
+    gMeme.lines[gMeme.selectedLineIdx].x = x;
+    gMeme.lines[gMeme.selectedLineIdx].y = y;
+}
+
 function _saveMemesToStorage(meme) {
     let memes = loadFromStorage(KEY_MEMES);
     if (memes) gMemes = memes;
@@ -79,4 +84,12 @@ function removeLine() {
         document.querySelector('.input-text').value = '';
         gMeme.selectedLineIdx = 0;
     }
+}
+
+function getCurrentLine() {
+    return gMeme.lines[gMeme.selectedLineIdx];
+}
+
+function getCurrentIdx() {
+    return gMeme.selectedLineIdx;
 }

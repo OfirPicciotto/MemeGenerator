@@ -22,6 +22,7 @@ var gImgs = [
 ];
 
 var gFilterBy = '';
+var gKeyWords = [];
 
 function getImgs() {
     return gImgs;
@@ -47,4 +48,40 @@ function addImg(url) {
     }
     gImgs.push(newImg);
     return newImg.id;
+}
+
+function loadKeyWords() {
+    let keyWords = [];
+    gImgs.forEach((img) => {
+        img.keywords.forEach((keyword) => {
+            if (!keyWords.includes(keyword)) keyWords.push(keyword)
+        })
+    })
+    setKeyWords(keyWords);
+}
+
+function setKeyWords(keyWords) {
+    keyWords.forEach((keyword) => {
+        gKeyWords.push({ word: keyword, search: 1 })
+    })
+}
+
+function setKeywordSearch(word) {
+    gKeyWords.find(keyword => {
+        if (keyword.word === word) {
+            if (keyword.search < 4) keyword.search += 0.2;
+        }
+    })
+}
+
+function setFilter(keyWord) {
+    gFilterBy = keyWord;
+}
+
+function resetFilter() {
+    gFilterBy = '';
+}
+
+function getKeyWords() {
+    return gKeyWords;
 }

@@ -67,6 +67,18 @@ function onInputText(ev) {
     drawMeme();
 }
 
+function onMoveUp() {
+    const currLine = getCurrentLine();
+    setPosition(currLine.x, currLine.y - 5)
+    drawMeme();
+}
+
+function onMoveDown() {
+    const currLine = getCurrentLine();
+    setPosition(currLine.x, currLine.y + 5)
+    drawMeme();
+}
+
 function onAddLine() {
     let elTxtInput = document.querySelector('.input-text');
     if (!elTxtInput.value) return;
@@ -80,14 +92,71 @@ function onRemoveLine() {
     drawMeme();
 }
 
+function onSwitchLines() {
+    const meme = getMeme();
+    console.log(meme);
+    if (meme.selectedLineIdx === 0) {
+        if (meme.lines.length > 0) meme.selectedLineIdx = meme.lines.length - 1;
+    } else {
+        meme.selectedLineIdx = meme.selectedLineIdx - 1;
+    }
+    document.querySelector('.input-text').value = meme.lines[gMeme.selectedLineIdx].txt;
+}
+
+function onChangeSize(newVal) {
+    setNewType(newVal, 'size');
+    drawMeme();
+}
+
+
+function onLeft() {
+    const currLine = getCurrentLine();
+    setPosition(currLine.x - 5, currLine.y);
+    drawMeme();
+}
+
+function onCenter() {
+    const currLine = getCurrentLine();
+    setPosition(gCanvas.width / 2, currLine.y)
+    drawMeme();
+}
+
+function onRight() {
+    const currLine = getCurrentLine();
+    setPosition(currLine.x + 5, currLine.y);
+    drawMeme();
+}
+
 function onChangeFont(newFont) {
     setNewType(newFont, 'font');
     drawMeme();
 }
 
+
 function onChangeColor(newColor) {
     setNewType(newColor, 'color');
     drawMeme();
+}
+
+function onSaveMeme(elMeme) {
+    let memeId = elMeme.dataset.id;
+    let memeIdx = findOnSaveMemes(memeId);
+    let memes = loadFromStorage(KEY_MEMES);
+    gMeme = memes[memeIdx].gMeme;
+    openCanvas();
+    drawMeme();
+}
+
+function onDownload(elLink) {
+    var imgContent = gCanvas.toDataURL('image/jpeg');
+    elLink.href = imgContent
+}
+
+function findOnSaveMemes(memeId) {
+    let memes = loadFromStorage(KEY_MEMES);
+    return memes.findIndex(meme => {
+        return meme.id === memeId;
+    })
 }
 
 function startDrag(ev) {
@@ -128,55 +197,6 @@ function drag(ev) {
     drawMeme();
 }
 
-
-function onSaveMeme(elMeme) {
-    let memeId = elMeme.dataset.id;
-    let memeIdx = findOnSaveMemes(memeId);
-    let memes = loadFromStorage(KEY_MEMES);
-    gMeme = memes[memeIdx].gMeme;
-    openCanvas();
-    drawMeme();
-}
-
-function findOnSaveMemes(memeId) {
-    let memes = loadFromStorage(KEY_MEMES);
-    return memes.findIndex(meme => {
-        return meme.id === memeId;
-    })
-}
-
-function uploadImg(elForm, ev) {
-    ev.preventDefault();
-    document.getElementById('imgData').value = gCanvas.toDataURL("image/jpeg");
-    var imgSrc = document.getElementById('imgData').src;
-    var imgAlt = document.getElementById('imgData').getAttribute.alt;
-    function onSuccess(uploadedImgUrl) {
-        uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-        document.querySelector('.share-container').innerHTML = `
-        <a class="btn share" href="//www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(imgSrc)}&t=${encodeURIComponent(imgAlt)}"
-        title="Share on Facebook" target="_blank" onclick="window.open('//www.facebook.com/sharer/sharer.php?u=
-        ${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
-        Share   
-        </a>`
-    }
-    doUploadImg(elForm, onSuccess);
-}
-
-function doUploadImg(elForm, onSuccess) {
-    var formData = new FormData(elForm);
-    fetch('//ca-upload.com/here/upload.php', {
-        method: 'POST',
-        body: formData
-    })
-        .then(function (res) {
-            return res.text()
-        })
-        .then(onSuccess)
-        .catch(function (err) {
-            console.error(err)
-        })
-}
-
 function onSave() {
     var imgContent = gCanvas.toDataURL('image/jpeg');
     var meme = {
@@ -187,20 +207,3 @@ function onSave() {
     _saveMemesToStorage(meme);
 }
 
-function onImgInput(ev) {
-    loadImageFromInput(ev, renderCanvas)
-}
-
-function loadImageFromInput(ev, onImageReady) {
-    document.querySelector('.share-container').innerHTML = ''
-    var reader = new FileReader();
-    reader.onload = function (event) {
-        var img = new Image();
-        img.onload = onImageReady.bind(null, img);
-        img.src = event.target.result;
-        var newImgId = addImg(img.src);
-        var newMeme = creatMeme(newImgId);
-        setMeme(newMeme);
-    }
-    reader.readAsDataURL(ev.target.files[0]);
-}

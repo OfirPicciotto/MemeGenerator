@@ -3,6 +3,9 @@
 function init() {
     openGellary();
     renderImgs();
+    loadKeyWords();
+    renderKeywords();
+    renderKeyWordsSearch();
 }
 
 function openGellary() {
@@ -29,6 +32,8 @@ function openCanvas() {
 
 function onBackToGallery() {
     openGellary();
+    resetFilter();
+    renderKeyWordsSearch();
     renderImgs();
 }
 
@@ -56,6 +61,52 @@ function renderSavedImgs() {
         })
         document.querySelector('.image-gallery').innerHTML = strHtmls.join('')
     }
+}
+
+function renderKeywords() {
+    const keyWords = getKeyWords();
+    let strHtmls = keyWords.map(function (keyWord) {
+        return `<option value="${keyWord.word}">`
+    })
+    document.querySelector('#search').innerHTML = strHtmls.join('')
+}
+
+function renderKeyWordsSearch() {
+    const keyWords = getKeyWords();
+    let strHtmls = ``;
+    for (let i = 0; i < 5; i++) {
+        strHtmls += `<button class="btn-keyword" onclick="onKeyWord(this)" 
+        style="font-size:${keyWords[i].search}rem">${keyWords[i].word}</button>`
+    }
+    document.querySelector('.key-words').innerHTML = strHtmls;
+    let htmlCloseBtn = `<button data-trans="more" class="more-btn" onclick="onAllKeyWords()">More</button>`;
+    document.querySelector('.key-words').innerHTML += htmlCloseBtn;
+}
+
+function onKeyWord(elKeyword) {
+    onFilterKeyWord(elKeyword.innerText);
+}
+
+function onFilterKeyWord(keyWord) {
+    setKeywordSearch(keyWord)
+    setFilter(keyWord);
+    renderImgs();
+    renderKeyWordsSearch();
+}
+
+function onAllKeyWords() {
+    const keyWords = getKeyWords();
+    let strHtmls = keyWords.map(function (keyWord) {
+        return `<button class="btn-keyword" onclick="onKeyWord(this)"
+         style="font-size:${keyWord.search}rem">${keyWord.word}</button>`
+    })
+    document.querySelector('.key-words').innerHTML = strHtmls.join('');
+    let htmlCloseBtn = `<button class = "btn-keyword-close" onclick="onCloseKeyWords()">X</button>`;
+    document.querySelector('.key-words').innerHTML += htmlCloseBtn;
+}
+
+function onCloseKeyWords() {
+    renderKeyWordsSearch();
 }
 
 function onChooseMeme(elMeme) {

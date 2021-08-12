@@ -87,6 +87,21 @@ body {
     padding-block-start: 10px;
 }
 
+.key-words {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.key-words button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.key-words button:hover {
+    box-shadow: -2px -1px 8px #ff7f00;
+}
+
 .image-gallery {
     height: 100%;
     margin-top: 20px;
@@ -131,14 +146,14 @@ body {
     grid-column: 1 / 3;
 }
 
-.font-select{
+.font-select {
     grid-row: 4;
-    grid-column: 1 / 3;  
+    grid-column: 1 / 3;
 }
 
-.btn-color-line{
+.btn-color-line {
     grid-row: 4;
-    grid-column: 3 / 4; 
+    grid-column: 3 / 4;
 }
 
 .stickers {
@@ -148,6 +163,11 @@ body {
     grid-column: 4 / 6;
     border: 1px solid rgba(0, 0, 0, 1);
     box-shadow: -1px 1px 4px black;
+}
+
+.fa.fa-download,
+.fas.fa-upload {
+    color: black;
 }
 
 canvas {
@@ -215,6 +235,10 @@ canvas {
 .copyright {
     font-family: Montserrat-Thin, sans-serif;
     font-size: 1rem;
+}
+
+.btn-upload{
+    padding: 21px 22px;
 }
 
 /* HELPERS */
