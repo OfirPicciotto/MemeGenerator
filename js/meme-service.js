@@ -39,6 +39,13 @@ function addLine() {
     gMeme.lines.push(line);
 }
 
+function addSticker(xPos, yPos, txt, size) {
+    gId++;
+    gMeme.selectedLineIdx = gMeme.lines.length;
+    let line = createLine(xPos, yPos, txt, size);
+    gMeme.lines.push(line);
+}
+
 function createLine(x, y, txt = 'Your Text Here', size = 40, align = 'center', color = gColor, colorLine = gColorLine, font = gFontFamily, widthTxt = 0) {
     return {
         id: gId,

@@ -12,8 +12,6 @@
 </head>
 
 <body onload="init()">
-    <div class="screen" onclick="toggleMenu()"></div>
-
     <header class="header">
         <div class="container flex space-between align-center">
             <div class="logo">memgen</div>
@@ -22,8 +20,10 @@
                 <div class="seperator"></div>
                 <li><button data-trans="memes" class="btn-header" onclick="onOpenMememsGallery()">Memes</button></li>
                 <div class="seperator"></div>
-                <li><button data-trans="about" class="btn-header" onclick="toggleModal()">About</button></li>
+                <li><button class="btn-header">About</button></li>
             </ul>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <button class="mobile-close-btn display" onclick="toggleMenu()">X</button>
         </div>
     </header>
 
@@ -52,7 +52,7 @@
                 <option style="font-family: PaletteMosaic-Regular" value="PaletteMosaic-Regular">AbCdEF אבגדהו</option>
                 <option style="font-family: MonteCarlo-Regular" value="MonteCarlo-Regular">AbCdEF אבגדהו</option>
             </select>
-            <button class="color-fill"> <input type="color" id="shape-color" name="contact"
+            <button class="color-fill"> <input type="color" id="shape-color" name="color"
                     onchange="onChangeColor(this.value)" /></button>
             <div class="stickers flex space-between">
                 <label onclick="onCreateSticker(this.innerText)" class="sticker">🥺</label>
@@ -66,11 +66,9 @@
             <button class="btn-save" onclick="onSave()"> <i class="far fa-save"></i></button>
             <button class="btn-down"><a href="#" onclick="onDownload(this)" download="img.jpg"><i
                         class="fa fa-download"></i></a></button>
-            <label for="image">
-                <input type="file" name="image" id="btn-upload" style="display:none;" />
-                <button class="btn-upload" onclick="onImgInput(event)"><i class="fas fa-upload"></i></button>
-            </label>
+            <button data-trans="share-page" class="btn-web-share"><i class="fas fa-share"></i></button>
         </div>
+
     </div>
 
     <div class="gallery container">
@@ -119,6 +117,5 @@
 <script src="js/gallery-controller.js"></script>
 <script src="js/canvas-controller.js"></script>
 <script src="js/meme-service.js"></script>
-<script src="js/upload-service.js"></script>
 
 </html>

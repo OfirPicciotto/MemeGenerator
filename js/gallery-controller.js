@@ -124,3 +124,22 @@ function clearInput() {
     elInput.value = '';
 }
 
+const shareData = {
+    title: 'MemeGen',
+    text: 'This is Where your memes at!',
+    url: window.location.href
+}
+
+const btn = document.querySelector('.btn-web-share');
+btn.addEventListener('click', async () => {
+    try {
+        await navigator.share(shareData)
+        console.log('Meme was shared successfully');
+    } catch (err) {
+        console.log('Error: ' + err);
+    }
+});
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open');
+}
