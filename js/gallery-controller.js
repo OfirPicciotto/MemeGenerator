@@ -35,11 +35,13 @@ function onBackToGallery() {
     resetFilter();
     renderKeyWordsSearch();
     renderImgs();
+    toggleMenu();
 }
 
 function onOpenMememsGallery() {
     openGellary();
     renderSavedImgs();
+    toggleMenu();
 }
 
 function renderImgs() {
