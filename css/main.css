@@ -338,16 +338,17 @@ canvas {
 
 @media (max-width: 550px) {
     .container {
-        max-width: 400px;
+        max-width: 550px;
     }
-    .main-header {
+    /* .main-header {
         margin-bottom: 10px;
-    }
+    } */
     .logo {
         font-size: 1.1rem;
     }
     .main-nav {
-        top: 28px;
+        top: 21px;
+
     }
     .meme-editor {
         flex-direction: column;
