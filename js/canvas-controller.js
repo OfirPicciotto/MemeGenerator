@@ -228,4 +228,3 @@ function onSave() {
     }
     _saveMemesToStorage(meme);
 }
-
