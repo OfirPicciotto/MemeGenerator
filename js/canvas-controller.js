@@ -164,21 +164,21 @@ function findOnSaveMemes(memeId) {
     })
 }
 
-function drawSign() {
-    const currLineIdx = getCurrentIdx();
-    const meme = getMeme();
-    let width = meme.lines[currLineIdx].widthTxt;
-    let height = meme.lines[currLineIdx].size * 1.2;
-    let posX = meme.lines[currLineIdx].x - meme.lines[currLineIdx].widthTxt / 2;
-    let posY = meme.lines[currLineIdx].y - meme.lines[currLineIdx].size;
-    gCtx.beginPath();
-    gCtx.rect(posX, posY, width, height);
-    gCtx.strokeStyle = "black";
-    gCtx.fillStyle = "rgb(0, 0, 0, 0.25)";
-    gCtx.lineWidth = '2';
-    gCtx.strokeRect(posX, posY, width, height);
-    gCtx.fillRect(posX, posY, width, height);
-}
+// function drawSign() {
+//     const currLineIdx = getCurrentIdx();
+//     const meme = getMeme();
+//     let width = meme.lines[currLineIdx].widthTxt;
+//     let height = meme.lines[currLineIdx].size * 1.2;
+//     let posX = meme.lines[currLineIdx].x - meme.lines[currLineIdx].widthTxt / 2;
+//     let posY = meme.lines[currLineIdx].y - meme.lines[currLineIdx].size;
+//     gCtx.beginPath();
+//     gCtx.rect(posX, posY, width, height);
+//     gCtx.strokeStyle = "black";
+//     gCtx.fillStyle = "rgb(0, 0, 0, 0.25)";
+//     gCtx.lineWidth = '2';
+//     gCtx.strokeRect(posX, posY, width, height);
+//     gCtx.fillRect(posX, posY, width, height);
+// }
 
 
 function startDrag(ev) {
