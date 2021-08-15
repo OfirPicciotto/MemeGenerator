@@ -40,16 +40,6 @@ function getImgById(imgId) {
     return gImgs.find((img) => img.id === imgId);
 }
 
-function addImg(url) {
-    let newImg = {
-        id: gImgs.length + 1,
-        url: url,
-        keywords: ['']
-    }
-    gImgs.push(newImg);
-    return newImg.id;
-}
-
 function loadKeyWords() {
     let keyWords = [];
     gImgs.forEach((img) => {

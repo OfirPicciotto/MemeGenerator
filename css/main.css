@@ -85,6 +85,7 @@ body {
 
 .search-section {
     padding-block-start: 10px;
+    padding-inline-start: 15px;
 }
 
 .key-words {
@@ -254,8 +255,7 @@ canvas {
 }
 
 @media (min-width: 820px) {
-    .mobile-menu-btn,
-    .mobile-close-btn {
+    .mobile-menu-btn {
         display: none;
     }
 }
@@ -324,10 +324,13 @@ canvas {
     }
     .gallery {
         padding-top: 50px;
+        padding-inline-start: 10px;
+        padding-inline-end: 10px;
     }
     .search-section {
         align-items: center;
         padding: 5px;
+        padding-inline-start: 10px;
     }
     .footer .container {
         flex-direction: column;
@@ -340,16 +343,14 @@ canvas {
     .container {
         max-width: 550px;
     }
-    /* .main-header {
-        margin-bottom: 10px;
-    } */
+
     .logo {
         font-size: 1.1rem;
     }
     .main-nav {
         top: 21px;
-
     }
+
     .meme-editor {
         flex-direction: column;
         height: 100%;
